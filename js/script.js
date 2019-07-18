@@ -37,16 +37,10 @@
         targetArticle.classList.add('active');
     };
 
-    /*const links = document.querySelectorAll('.titles a');
-    console.log(links);
-    for (let link of links) {
-      link.addEventListener('click', titleClickHandler);
-    }*/
-
-    const optArticleSelector = '.post',
-        optTitleSelector = '.post-title',
+        const optArticleSelector = '.post',
+              optTitleSelector = '.post-title',
         /*tytuł pojedynczego posta*/
-        optTitleListSelector = '.titles'; /*lista tytułów postów*/
+             optTitleListSelector = '.titles'; /*lista tytułów postów*/
 
     /*function generateTitleLinks() {
 
