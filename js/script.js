@@ -38,7 +38,8 @@
         optTitleListSelector = '.titles',
         /*lista tytułów postów*/
         optArticleTagsSelector = '.post-tags .list',
-        optArticleAuthorSelector = '.post .post-author';
+        optArticleAuthorSelector = '.authors',
+        optTagsListSelector = '.tags.list';
 
 
     function generateTitleLinks(customSelector = '') {
@@ -82,6 +83,12 @@
     generateTitleLinks();
 
     function generateTags() {
+        /* [NEW] create a new variable allTags with an empty array */
+        let allTags = [];
+
+        //allTags.push('dupa');
+        //console.log('alltags', allTags);
+
         /* find all articles */
         const articles = document.querySelectorAll(optArticleSelector);
         //console.log(articles);
@@ -106,6 +113,7 @@
             /* START LOOP: for each tag */
             for (let tag of articleTagsArray) {
                 // console.log(tag);
+
                 /* generate HTML of the link */
                 const linkHTML = '<li><a href="#tag-' + tag + '">' + ' ' + tag + ' ' + '</a></li>';
                 //console.log(linkHTML);
@@ -113,6 +121,13 @@
                 /* add generated code to html variable */
                 html = html + linkHTML;
 
+                /* [NEW] check if this link is NOT already in allTags */
+                if (allTags.indexOf(linkHTML) == -1) {
+
+                /* [NEW] add generated code to allTags array */
+                allTags.push(linkHTML);
+                //console.log(allTags);
+                }
                 /* END LOOP: for each tag */
             }
             /* insert HTML of all the links into the tags wrapper */
@@ -120,6 +135,12 @@
             //console.log(html);
             /* END LOOP: for every article: */
         }
+        /* [NEW] find list of tags in right column */
+        const tagList = document.querySelector('.tags');
+        console.log(tagList);
+
+        /* [NEW] add html from allTags to tagList */
+        tagList.innerHTML = allTags.join(' ');
 
     }
 
@@ -141,7 +162,7 @@
 
         /* find all tag links with class active */
         const activeTagLinks = document.querySelectorAll('a.active[href^="#tag-"]');
-        console.log(activeTagLinks);
+        //console.log(activeTagLinks);
 
         /* START LOOP: for each active tag link */
         for (let activeTagLink of activeTagLinks) {
@@ -197,14 +218,14 @@
 
             /* get author from data-author attribute */
             const author = article.getAttribute('data-author');
-            console.log(author);
+            //console.log(author);
 
             const postAuthor = article.querySelector('.post .post-author');
             postAuthor.innerHTML = 'by <a href="#author-' + author + '">' + author + '</a>';
 
             /* generate HTML of the link */
             const linkHTML = '<li><a href="#author-' + author + '">' + author + '</a></li>';
-            console.log(linkHTML);
+            //console.log(linkHTML);
 
             /* add generated code to html variable */
             html = html + linkHTML;
@@ -277,4 +298,6 @@
         }
     }
     addClickListenersToAuthors();
-}
+    }
+
+
