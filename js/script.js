@@ -34,11 +34,9 @@
 
     const optArticleSelector = '.post',
         optTitleSelector = '.post-title',
-        /*tytuł pojedynczego posta*/
         optTitleListSelector = '.titles',
-        /*lista tytułów postów*/
         optArticleTagsSelector = '.post-tags .list',
-        optArticleAuthorSelector = '.post-author',
+        optArticleAuthorSelector = '.authors',
         optTagsListSelector = '.tags.list',
         optCloudClassCount = 5,
         optCloudClassPrefix = 'tag-size-';
@@ -52,9 +50,8 @@
 
         /* find all the articles and save them to variable: articles */
         const articles = document.querySelectorAll(optArticleSelector + customSelector);
-        //console.log(articles);
-        //console.log(customSelector);
 
+        /* make html variable with empty string */
         let html = '';
 
         for (let article of articles) {
@@ -120,9 +117,6 @@
         /* [NEW] create a new variable allTags with an empty object */
         let allTags = {};
 
-        //allTags.push('dupa');
-        //console.log('alltags:', allTags);
-
         /* find all articles */
         const articles = document.querySelectorAll(optArticleSelector);
         //console.log(articles);
@@ -131,10 +125,6 @@
         for (let article of articles) {
             /* find tags wrapper */
             const tagWrapper = article.querySelector(optArticleTagsSelector);
-
-
-            /* make html variable with empty string */
-
 
             /* get tags from data-tags attribute */
             const articleTags = article.getAttribute('data-tags');
@@ -162,61 +152,47 @@
                 } else {
                     allTags[tag]++;
                 }
-                /* [NEW] add generated code to array allTags
-                    allTags.push(linkHTML);*/
+
                 /* END LOOP: for each tag */
             }
 
             /* insert HTML of all the links into the tags wrapper */
             tagWrapper.innerHTML = html;
-            //console.log(tagWrapper);
+
 
             /* END LOOP: for every article: */
 
         }
         /* [NEW] find list of tags in right column */
         const tagList = document.querySelector('.tags');
-        // console.log(tagList);
 
-        /* [NEW] add html from allTags to tagList */
-        /*tagList.innerHTML = allTags.join(' ');*/
+        /*[NEW] create const tagsParams*/
 
         const tagsParams = calculateTagsParams(allTags);
-        //console.log('tagsParams:', tagsParams);
+
 
         /*[NEW] create variable for all links HTML code*/
         let allTagsHTML = '';
 
-        //console.log(allTags);
         /*[NEW] START LOOP: for each tag in allTags:*/
         for (let tag in allTags) {
 
-            console.log(tag);
+
             /*[NEW] generate code of a link and add it to allTaggsHTML*/
 
             const tagLinkHTML = calculateTagClass(allTags[tag], tagsParams);
             //allTagsHTML += '<li><a href="#tag-' + tag + ' class="' + tagLinkHTML + '">' + tag + '</a>' + '(' + allTags[tag] + ')</li>';
             allTagsHTML += '<a href="#tag-' + tag + '" class="' + tagLinkHTML + '"> ' + tag + '</a>' /*+'(' + allTags[tag] + ')'*/ ;
 
-
-
-
-            // console.log('taglinkHTML:'+ tagLinkHTML);
             //allTagsHTML += tagLinkHTML;
 
             console.log(allTagsHTML);
-
             /*[NEW] END LOOP: for each tag in allTags*/
         }
 
         /*[NEW] add html from allTaggsHTML to tagList*/
         tagList.innerHTML = allTagsHTML;
         console.log(allTagsHTML);
-
-
-
-
-
 
 
 
@@ -230,7 +206,6 @@
 
         /* make new constant named "clickedElement" and give it the value of "this" */
         const clickedElement = this;
-        //console.log(clickedElement);
 
         /* make a new constant "href" and read the attribute "href" of the clicked element */
         const href = clickedElement.getAttribute('href');
@@ -290,6 +265,10 @@
         const authorWrapper = document.querySelector(optArticleAuthorSelector);
         /* make html variable with empty string */
         let html = '';
+
+        /* [NEW] create a new variable allAuthors with an empty array */
+
+        const allAuthors = [];
 
         /* START LOOP: for every article: */
         for (let article of articles) {
@@ -369,10 +348,6 @@
             // console.log(authorLink);
             authorLink.addEventListener('click', authorClickHandler);
             /* END LOOP: for each link */
-
-
-
-
         }
     }
     addClickListenersToAuthors();
