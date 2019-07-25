@@ -114,3 +114,37 @@ body {
 .post-tags .list li {
   margin-right: 5px;
 }
+
+/*Sidebar*/
+.sidebar .tags .tag-size-1 {
+  font-size: 100%;
+  color: #6a89cc;
+  display: inline;
+}
+
+.sidebar .tags .tag-size-2 {
+  font-size: 120%;
+  color: #60a3bc;
+  display: inline;
+}
+
+.sidebar .tags .tag-size-3 {
+  font-size: 150%;
+  color: #3c6382;
+  display: inline;
+}
+
+.sidebar .tags .tag-size-4 {
+  font-size: 200%;
+  color: #079992;
+  display: inline;
+}
+
+.sidebar .tags .tag-size-5 {
+  font-size: 230%;
+  color: #1e3799;
+}
+
+.sidebar .tags li {
+  display: inline;
+}

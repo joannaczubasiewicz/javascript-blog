@@ -86,37 +86,35 @@
 
     generateTitleLinks();
 
-    function calculateTagsParams(tags){
-        const tagsParams = {'max':0, 'min': 999999};
+    function calculateTagsParams(tags) {
+        const tagsParams = { 'max': 0, 'min': 999999 };
 
-        for( let tag in tags) {
-         if (tagsParams.max < tags[tag]){
-           tagsParams.max = tags[tag];
-         }
-         if (tagsParams.min > tags[tag]){
-           tagsParams.min = tags[tag];
-         }
+        for (let tag in tags) {
+            if (tagsParams.max < tags[tag]) {
+                tagsParams.max = tags[tag];
+            }
+            if (tagsParams.min > tags[tag]) {
+                tagsParams.min = tags[tag];
+            }
 
         }
-         //console.log(params.max);
-         console.log(tagsParams);
-        
-      return tagsParams;
+
+        return tagsParams;
     }
 
-    function calculateTagClass(count, tagsParams){
+    function calculateTagClass(count, tagsParams) {
 
-      const normalizedCount = count - tagsParams.min;
-      const normalizedMax = tagsParams.max - tagsParams.min;
-      const percentage = normalizedCount / normalizedMax;
-      const classNumber = Math.floor( percentage * (optCloudClassCount - 1) + 1 );
+        const normalizedCount = count - tagsParams.min;
+        const normalizedMax = tagsParams.max - tagsParams.min;
+        const percentage = normalizedCount / normalizedMax;
+        const classNumber = Math.floor(percentage * (optCloudClassCount - 1) + 1);
 
-      const tagClass = optCloudClassPrefix + classNumber;
-      return tagClass;
-    
+        const tagClass = optCloudClassPrefix + classNumber;
+        return tagClass;
+
 
     }
-   
+
 
     function generateTags() {
         /* [NEW] create a new variable allTags with an empty object */
@@ -128,109 +126,100 @@
         /* find all articles */
         const articles = document.querySelectorAll(optArticleSelector);
         //console.log(articles);
-          let html = '';
+        let html = '';
         /* START LOOP: for every article: */
         for (let article of articles) {
             /* find tags wrapper */
             const tagWrapper = article.querySelector(optArticleTagsSelector);
-            
+
 
             /* make html variable with empty string */
-            
+
 
             /* get tags from data-tags attribute */
             const articleTags = article.getAttribute('data-tags');
-            
+
 
             /* split tags into array */
             const articleTagsArray = articleTags.split(' ');
-            
+
 
             /* START LOOP: for each tag */
             for (let tag of articleTagsArray) {
-               
+
 
                 /* generate HTML of the link */
                 const linkHTML = '<li><a href="#tag-' + tag + '">' + ' ' + tag + ' ' + '</a></li>';
-                
+
 
                 /* add generated code to html variable */
-                html = html + linkHTML;           
+                html = html + linkHTML;
 
                 /* [NEW] check if this link is NOT already in allTags */
                 if (!allTags.hasOwnProperty(tag)) {
                     /*[NEW] add tag to allTags object*/
-                    allTags[tag]=1;
-                }else {
-                        allTags[tag]++;
-                    }
-                    /* [NEW] add generated code to array allTags 
-                        allTags.push(linkHTML);*/
-                    /* END LOOP: for each tag */
+                    allTags[tag] = 1;
+                } else {
+                    allTags[tag]++;
+                }
+                /* [NEW] add generated code to array allTags
+                    allTags.push(linkHTML);*/
+                /* END LOOP: for each tag */
             }
-
-            const tagsParam = calculateTagsParams(allTags);
-            console.log(allTags);
-
-            //const classNumber_tutaj = calculateTagClass (2, tagsParam);
-              //console.log(classNumber_tutaj);
-
-            // console.log(calculateTagClass (2, tagsParam));
-
 
             /* insert HTML of all the links into the tags wrapper */
             tagWrapper.innerHTML = html;
             //console.log(tagWrapper);
-            
+
             /* END LOOP: for every article: */
-              
+
         }
         /* [NEW] find list of tags in right column */
         const tagList = document.querySelector('.tags');
-      // console.log(tagList);
+        // console.log(tagList);
 
         /* [NEW] add html from allTags to tagList */
         /*tagList.innerHTML = allTags.join(' ');*/
-        
+
         const tagsParams = calculateTagsParams(allTags);
         //console.log('tagsParams:', tagsParams);
 
         /*[NEW] create variable for all links HTML code*/
         let allTagsHTML = '';
 
-          //console.log(allTags);
+        //console.log(allTags);
         /*[NEW] START LOOP: for each tag in allTags:*/
-        for (let tag in allTags){
-          
+        for (let tag in allTags) {
+
             console.log(tag);
             /*[NEW] generate code of a link and add it to allTaggsHTML*/
 
             const tagLinkHTML = calculateTagClass(allTags[tag], tagsParams);
-            allTagsHTML += '<li><a href="#tag-' + tag + ' class='+tagLinkHTML + '>'  + tag  + '</a>' + '('+allTags[tag]+')</li>';
-            //allTagsHTML += '</a>' + '('+allTags[tag]+')<a href="#tag-' + tag + '>' + ' ' + tag;
+            //allTagsHTML += '<li><a href="#tag-' + tag + ' class="' + tagLinkHTML + '">' + tag + '</a>' + '(' + allTags[tag] + ')</li>';
+            allTagsHTML += '<a href="#tag-' + tag + '" class="' + tagLinkHTML + '"> ' + tag + '</a>' /*+'(' + allTags[tag] + ')'*/ ;
 
 
-           
 
-           // console.log('taglinkHTML:'+ tagLinkHTML);
+
+            // console.log('taglinkHTML:'+ tagLinkHTML);
             //allTagsHTML += tagLinkHTML;
 
-           //console.log(allTagsHTML);
-          
+            console.log(allTagsHTML);
+
             /*[NEW] END LOOP: for each tag in allTags*/
         }
-        
+
         /*[NEW] add html from allTaggsHTML to tagList*/
         tagList.innerHTML = allTagsHTML;
         console.log(allTagsHTML);
-        
-        
-
-        
 
 
 
-        
+
+
+
+
+
     }
 
     generateTags();
@@ -387,6 +376,4 @@
         }
     }
     addClickListenersToAuthors();
-    }
-
-
+}
