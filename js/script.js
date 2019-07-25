@@ -286,11 +286,24 @@
 
             /* add generated code to html variable */
             html = html + linkHTML;
+            /* [NEW] check if this link is NOT already in allTags */
+            if (allAuthors.indexOf(linkHTML) == -1) {
+                /* [NEW] add generated code to allTags array */
+                allAuthors.push(linkHTML);
+            }
+
         }
 
 
         /* insert HTML of all the links into the tags wrapper */
         authorWrapper.innerHTML = html;
+
+        /* [NEW] find list of tags in right column */
+        const tagList = document.querySelector('.authors');
+        /* [NEW] add html from allTags to tagList */
+        tagList.innerHTML = allAuthors.join(' ');
+
+
 
     }
     generateAuthors();
