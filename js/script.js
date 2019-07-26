@@ -181,18 +181,16 @@
             /*[NEW] generate code of a link and add it to allTaggsHTML*/
 
             const tagLinkHTML = calculateTagClass(allTags[tag], tagsParams);
-            //allTagsHTML += '<li><a href="#tag-' + tag + ' class="' + tagLinkHTML + '">' + tag + '</a>' + '(' + allTags[tag] + ')</li>';
+
             allTagsHTML += '<a href="#tag-' + tag + '" class="' + tagLinkHTML + '"> ' + tag + '</a>' /*+'(' + allTags[tag] + ')'*/ ;
 
-            //allTagsHTML += tagLinkHTML;
 
-            //console.log(allTagsHTML);
             /*[NEW] END LOOP: for each tag in allTags*/
         }
 
         /*[NEW] add html from allTaggsHTML to tagList*/
         tagList.innerHTML = allTagsHTML;
-        //console.log(allTagsHTML);
+
 
 
 
@@ -215,7 +213,7 @@
 
         /* find all tag links with class active */
         const activeTagLinks = document.querySelectorAll('a.active[href^="#tag-"]');
-        //console.log(activeTagLinks);
+
 
         /* START LOOP: for each active tag link */
         for (let activeTagLink of activeTagLinks) {
@@ -226,7 +224,7 @@
 
         /* find all tag links with "href" attribute equal to the "href" constant */
         const hrefTagLinks = document.querySelectorAll('a[href="' + href + '"]');
-        //console.log(hrefTagLinks);
+
 
         /* START LOOP: for each found tag link */
         for (let hrefTagLink of hrefTagLinks) {
@@ -243,7 +241,7 @@
     function addClickListenersToTags() {
         /* find all links to tags */
         const tagLinks = document.querySelectorAll('a[href^="#tag-"]');
-        //console.log(tagLinks);
+
 
         /* START LOOP: for each link */
         for (let tagLink of tagLinks) {
@@ -294,7 +292,7 @@
             } else {
                 allAuthors[author]++;
             }
-            console.log(allAuthors);
+
         }
 
 
@@ -309,11 +307,11 @@
 
         /*[NEW] start LOOP for each authorTag in allAuthors*/
 
-        for (let authorTag in allAuthors) {
+        for (let author in allAuthors) {
             /*[NEW] generate code of a link and add it to allAuthorsHTML*/
-            allAuthorsHTML += author + '(' + allAuthors[author] + ')';
+            allAuthorsHTML += '<li><a href="#author-' + author + '">' + author + '</a></li>' + '(' + allAuthors[author] + ')';
 
-            console.log(allAuthorsHTML);
+
         }
 
         authorWrapper.innerHTML = allAuthorsHTML;
