@@ -119,10 +119,11 @@
 
         /* find all articles */
         const articles = document.querySelectorAll(optArticleSelector);
-        //console.log(articles);
-        let html = '';
+
         /* START LOOP: for every article: */
         for (let article of articles) {
+
+            let html = '';
             /* find tags wrapper */
             const tagWrapper = article.querySelector(optArticleTagsSelector);
 
