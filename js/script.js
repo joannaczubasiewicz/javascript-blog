@@ -186,13 +186,13 @@
 
             //allTagsHTML += tagLinkHTML;
 
-            console.log(allTagsHTML);
+            //console.log(allTagsHTML);
             /*[NEW] END LOOP: for each tag in allTags*/
         }
 
         /*[NEW] add html from allTaggsHTML to tagList*/
         tagList.innerHTML = allTagsHTML;
-        console.log(allTagsHTML);
+        //console.log(allTagsHTML);
 
 
 
@@ -266,9 +266,9 @@
         /* make html variable with empty string */
         let html = '';
 
-        /* [NEW] create a new variable allAuthors with an empty array */
+        /* [NEW] create a new variable allAuthors with an empty object */
 
-        const allAuthors = [];
+        const allAuthors = {};
 
         /* START LOOP: for every article: */
         for (let article of articles) {
@@ -286,12 +286,15 @@
 
             /* add generated code to html variable */
             html = html + linkHTML;
-            /* [NEW] check if this link is NOT already in allTags */
-            if (allAuthors.indexOf(linkHTML) == -1) {
-                /* [NEW] add generated code to allTags array */
-                allAuthors.push(linkHTML);
-            }
 
+            /* [NEW] check if this link is NOT already in allAuthors */
+            if (!allAuthors.hasOwnProperty(author)) {
+                /* [NEW] add tag to allAuthors object */
+                allAuthors[author] = 1;
+            } else {
+                allAuthors[author]++;
+            }
+            console.log(allAuthors);
         }
 
 
@@ -300,8 +303,20 @@
 
         /* [NEW] find list of tags in right column */
         const tagList = document.querySelector('.authors');
-        /* [NEW] add html from allTags to tagList */
-        tagList.innerHTML = allAuthors.join(' ');
+
+        /* [NEW] create new variable for all author links HTML code*/
+        let allAuthorsHTML = '';
+
+        /*[NEW] start LOOP for each authorTag in allAuthors*/
+
+        for (let authorTag in allAuthors) {
+            /*[NEW] generate code of a link and add it to allAuthorsHTML*/
+            allAuthorsHTML += author + '(' + allAuthors[author] + ')';
+
+            console.log(allAuthorsHTML);
+        }
+
+        authorWrapper.innerHTML = allAuthorsHTML;
 
 
 
