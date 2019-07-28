@@ -1,4 +1,10 @@
 'use strict'; {
+    const templates = {
+        articleLink: Handlebars.compile(document.querySelector('#template-article-link').innerHTML),
+        tagLink: Handlebars.compile(document.querySelector('#template-tag-link').innerHTML),
+        authorLink: Handlebars.compile(document.querySelector('#template-author-link').innerHTML),
+    }
+
     const titleClickHandler = function(event) {
         event.preventDefault();
         const clickedElement = this;
@@ -64,7 +70,9 @@
             const articleTitle = article.querySelector(optTitleSelector).innerHTML;
 
             /* create HTML of the link */
-            const linkHTML = '<li><a href="#' + articleId + '"><span>' + articleTitle + '</span></a></li>';
+            //const linkHTML = '<li><a href="#' + articleId + '"><span>' + articleTitle + '</span></a></li>';
+            const linkHTMLData = { id: articleId, title: articleTitle };
+            const linkHTML = templates.articleLink(linkHTMLData);
 
             /* insert link into html variable */
             html = html + linkHTML;
@@ -140,7 +148,9 @@
 
 
                 /* generate HTML of the link */
-                const linkHTML = '<li><a href="#tag-' + tag + '">' + ' ' + tag + ' ' + '</a></li>';
+                //const linkHTML = '<li><a href="#tag-' + tag + '">' + ' ' + tag + ' ' + '</a></li>';
+                const linkHTMLData = { id: tag, title: tag };
+                const linkHTML = templates.tagLink(linkHTMLData);
 
 
                 /* add generated code to html variable */
@@ -274,10 +284,13 @@
 
             /* get author from data-author attribute */
             const author = article.getAttribute('data-author');
-            //console.log(author);
+            /*make const postauthor to select author in article */
 
             const postAuthor = article.querySelector('.post .post-author');
-            postAuthor.innerHTML = 'by <a href="#author-' + author + '">' + author + '</a>';
+            //postAuthor.innerHTML = 'by <a href="#author-' + author + '">' + author + '</a>';
+
+            const linkHTMLData = { id: author, title: author };
+            postAuthor.innerHTML = templates.authorLink(linkHTMLData);
 
             /* generate HTML of the link */
             const linkHTML = '<li><a href="#author-' + author + '">' + author + '</a></li>';
