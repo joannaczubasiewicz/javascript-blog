@@ -4,6 +4,8 @@
         tagLink: Handlebars.compile(document.querySelector('#template-tag-link').innerHTML),
         authorLink: Handlebars.compile(document.querySelector('#template-author-link').innerHTML),
         tagCloudLink: Handlebars.compile(document.querySelector('#template-tag-Cloud-link').innerHTML),
+        authorListLink: Handlebars.compile(document.querySelector('#template-author-list-link').innerHTML),
+
     }
 
     const titleClickHandler = function(event) {
@@ -199,18 +201,18 @@
                 count: allTags[tag],
                 className: calculateTagClass(allTags[tag], tagsParams)
             });
-            console.log(allTagsData);
+            console.log('clasa tagu', calculateTagClass(allTags[tag], tagsParams));
 
             /*[NEW] END LOOP: for each tag in allTags*/
         }
-
+        console.log('tagi przed chmurą', allTagsData);
         /*[NEW] add html from allTaggsHTML to tagList*/
         //tagList.innerHTML = allTagsHTML;
         tagList.innerHTML = templates.tagCloudLink(allTagsData);
-        console.log(allTagsData);
+        console.log(templates.tagCloudLink(allTagsData));
 
 
-
+        //addClickListenersToTags();
 
     }
 
@@ -271,7 +273,7 @@
 
     }
 
-    addClickListenersToTags();
+    //addClickListenersToTags();
 
     function generateAuthors() {
 
@@ -324,18 +326,25 @@
         const tagList = document.querySelector('.authors');
 
         /* [NEW] create new variable for all author links HTML code*/
-        let allAuthorsHTML = '';
+        //let allAuthorsHTML = '';
+        const allAuthorsData = { authors: [] };
+        
 
         /*[NEW] start LOOP for each authorTag in allAuthors*/
 
         for (let author in allAuthors) {
             /*[NEW] generate code of a link and add it to allAuthorsHTML*/
-            allAuthorsHTML += '<li><a href="#author-' + author + '">' + author + '</a></li>' + '(' + allAuthors[author] + ')';
-
-
+            //allAuthorsHTML += '<li><a href="#author-' + author + '">' + author + '</a></li>' + '(' + allAuthors[author] + ')';
+            allAuthorsData.authors.push({
+              author: author,
+              count: allAuthors[author],
+              
+            });
+            console.log('wtorek authors:', allAuthorsData);
         }
 
-        authorWrapper.innerHTML = allAuthorsHTML;
+        //authorWrapper.innerHTML = allAuthorsHTML;
+        authorWrapper.innerHTML = templates.authorListLink(allAuthorsData);
 
 
 

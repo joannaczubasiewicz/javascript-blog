@@ -100,7 +100,6 @@ body {
 
 .post-author {
   font-style: italic;
-  /*Sidebar*/
 }
 
 .post-author a {
@@ -120,35 +119,36 @@ body {
   margin-right: 5px;
 }
 
-.post-author .sidebar .tags .tag-size-1 {
+/*Sidebar*/
+.sidebar .tags .tag-size-1 {
   font-size: 100%;
   color: #6a89cc;
   display: inline;
 }
 
-.post-author .sidebar .tags .tag-size-2 {
+.sidebar .tags .tag-size-2 {
   font-size: 120%;
   color: #60a3bc;
   display: inline;
 }
 
-.post-author .sidebar .tags .tag-size-3 {
+.sidebar .tags .tag-size-3 {
   font-size: 150%;
   color: #3c6382;
   display: inline;
 }
 
-.post-author .sidebar .tags .tag-size-4 {
+.sidebar .tags .tag-size-4 {
   font-size: 200%;
   color: #079992;
   display: inline;
 }
 
-.post-author .sidebar .tags .tag-size-5 {
+.sidebar .tags .tag-size-5 {
   font-size: 230%;
   color: #1e3799;
 }
 
-.post-author .sidebar .tags li {
+.sidebar .tags li {
   display: inline;
 }
